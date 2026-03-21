@@ -28,5 +28,6 @@ const links = [
   { icon: 'https://avatars.githubusercontent.com/u/45261195?v=4', name: 'Aira', desc: 'Kind and Kawaii, Forever!~', links: 'https://aira.cafe' },
   { icon: 'https://avatars.githubusercontent.com/u/42381419?v=4', name: 'Akuta Zehy', desc: 'https://akutazehy.xyz/', links: 'https://akutazehy.xyz/'},
   { icon: 'https://avatars.githubusercontent.com/u/62592731?v=4', name: 'CuteLittleSky', desc: 'https://cutelittlesky.cn/', links: 'https://cutelittlesky.cn/' },
+  { icon: 'https://avatars.githubusercontent.com/u/87231632?v=4', name: '朝仓 彩铃', desc: '火星上面有什么？', links: 'https://mygo.plus' },
 ]
 </script>
