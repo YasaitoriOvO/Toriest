@@ -7,7 +7,7 @@
       <div class="mb-4">
         <img
           class="w-28 h-28 rounded-full border-4 border-lime-200 shadow-lg"
-          src="https://avatars.githubusercontent.com/u/118044114?v=4"
+          src="https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/me/icon.jpeg"
           alt="Profile"
         />
       </div>

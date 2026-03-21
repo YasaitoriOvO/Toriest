@@ -24,10 +24,10 @@
 
 <script setup>
 const links = [
-  { icon: 'https://avatars.githubusercontent.com/u/33394391?v=4', name: 'Hakadao', desc: 'Now I am become a loser, the destroyer of myself', links: 'https://hakadao.cc' },
-  { icon: 'https://avatars.githubusercontent.com/u/45261195?v=4', name: 'Aira', desc: 'Kind and Kawaii, Forever!~', links: 'https://aira.cafe' },
-  { icon: 'https://avatars.githubusercontent.com/u/42381419?v=4', name: 'Akuta Zehy', desc: 'https://akutazehy.xyz/', links: 'https://akutazehy.xyz/'},
-  { icon: 'https://avatars.githubusercontent.com/u/62592731?v=4', name: 'CuteLittleSky', desc: 'https://cutelittlesky.cn/', links: 'https://cutelittlesky.cn/' },
-  { icon: 'https://avatars.githubusercontent.com/u/87231632?v=4', name: '朝仓 彩玲', desc: '火星上面有什么？', links: 'https://mygo.plus' },
+  { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/hakadao.png', name: 'Hakadao', desc: 'Now I am become a loser, the destroyer of myself', links: 'https://hakadao.cc' },
+  { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/aira.png', name: 'Aira', desc: 'Kind and Kawaii, Forever!~', links: 'https://aira.cafe' },
+  { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/akutazehy.png', name: 'Akuta Zehy', desc: 'https://akutazehy.xyz/', links: 'https://akutazehy.xyz/'},
+  { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/cutelittlesky.png', name: 'CuteLittleSky', desc: 'https://cutelittlesky.cn/', links: 'https://cutelittlesky.cn/' },
+  { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/peter.png', name: '朝仓 彩玲', desc: '火星上面有什么？', links: 'https://mygo.plus' },
 ]
 </script>
