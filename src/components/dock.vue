@@ -61,10 +61,9 @@ defineEmits<{
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            height="24px"
+            fill="currentColor"
+            class="h-5 w-5"
             viewBox="0 -960 960 960"
-            width="24px"
-            stroke="currentColor"
           >
           <path
             stroke-linecap="round"
@@ -80,19 +79,19 @@ defineEmits<{
 </template>
 
 <style scoped>
-.dock-root {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
-  z-index: 30;
-  max-width: calc(100vw - 2rem);
-}
+  .dock-root {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+    z-index: 30;
+    max-width: calc(100vw - 2rem);
+  }
 
-.menu a.active {
-  background-color: var(--fallback-p,oklch(var(--p)/1));
-  color: var(--fallback-pc,oklch(var(--pc)/1));
-  font-weight: 600;
-  color: var(--color-info);
-}
+  .menu a.active {
+    background-color: var(--fallback-p,oklch(var(--p)/1));
+    color: var(--fallback-pc,oklch(var(--pc)/1));
+    font-weight: 600;
+    color: var(--color-info);
+  }
 </style>

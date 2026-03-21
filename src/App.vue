@@ -26,7 +26,7 @@ function handleNavigate(page: 'home' | 'projects' | 'links') {
 <template>
   <div class="app-shell stripe-bg">
     <div class="app-content flex flex-col min-h-dvh" :class="{ 'is-blurred': showInit && !isInitExiting }">
-      <main class="grow w-full z-10">
+      <main class="grow w-full z-10">    
         <Transition name="fade" mode="out-in">
           <IndexPage v-if="currentPage === 'home'" key="home" />
           <Project v-else-if="currentPage === 'projects'" key="projects" />

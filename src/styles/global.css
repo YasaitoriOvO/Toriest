@@ -35,6 +35,32 @@ body {
     src: url("../assets/charter_bold_italic.woff2") format("woff2");
 }
 
+.card {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+    circle at 70% 80%,
+    rgba(120,255,120,0.08),
+    transparent 60%
+    );
+    pointer-events: none;
+}
+
+#tsparticles {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+}
+
 .stripe-bg {
     background-color: #f6f6f6;
     background-image: repeating-linear-gradient(

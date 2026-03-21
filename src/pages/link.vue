@@ -5,29 +5,71 @@
     </h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div v-for="link in links" :key="link.name" class="card card-dash bg-base-100">
-      <div class="card-body">
-        <div class="flex items-center gap-2">
-        <img :src="link.icon" :alt="link.name" class="w-10 h-10 rounded-full border-2 border-primary shadow-lg" />
-        <h2 class="card-title">{{ link.name }}</h2>
+      <div
+        v-for="(link, index) in links"
+        :key="link.name"
+        class="card card-dash bg-base-100 fly-in"
+        :style="{ animationDelay: `${index * 0.1}s` }"
+      >
+        <div class="card-body">
+          <div class="flex items-center gap-2">
+            <img
+              :src="link.icon"
+              :alt="link.name"
+              class="w-10 h-10 rounded-full border-2 border-primary shadow-lg"
+            >
+            <h2 class="card-title">
+              {{ link.name }}
+            </h2>
+          </div>
+          <p>{{ link.desc }}</p>
+          <div class="card-actions w-full">
+            <a
+              :href="link.links"
+              target="_blank"
+              class="btn btn-primary w-full"
+            >GO
+            </a>
+          </div>
         </div>
-        <p>{{ link.desc }}</p>
-        <div class="card-actions w-full">
-        <a :href="link.links" target="_blank" class="btn btn-primary w-full">GO
-        </a>
-        </div>
-      </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-const links = [
-  { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/hakadao.jpeg', name: 'Hakadao', desc: 'Now I am become a loser, the destroyer of myself', links: 'https://hakadao.cc' },
-  { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/aira.png', name: 'Aira', desc: 'Kind and Kawaii, Forever!~', links: 'https://aira.cafe' },
-  { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/akutazehy.jpeg', name: 'Akuta Zehy', desc: 'https://akutazehy.xyz/', links: 'https://akutazehy.xyz/'},
-  { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/cutelittlesky.png', name: 'CuteLittleSky', desc: 'https://cutelittlesky.cn/', links: 'https://cutelittlesky.cn/' },
-  { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/peter.png', name: '朝仓 彩玲', desc: '火星上面有什么？', links: 'https://mygo.plus' },
-]
+  const links = [
+    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/hakadao.jpeg', name: 'Hakadao', desc: 'Now I am become a loser, the destroyer of myself', links: 'https://hakadao.cc' },
+    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/aira.png', name: 'Aira', desc: 'Kind and Kawaii, Forever!~', links: 'https://aira.cafe' },
+    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/akutazehy.jpeg', name: 'Akuta Zehy', desc: 'https://akutazehy.xyz/', links: 'https://akutazehy.xyz/'},
+    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/cutelittlesky.png', name: 'CuteLittleSky', desc: 'https://cutelittlesky.cn/', links: 'https://cutelittlesky.cn/' },
+    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/peter.jpeg', name: '朝仓 彩玲', desc: '火星上面有什么？', links: 'https://mygo.plus' },
+  ]
 </script>
+
+<style scoped>
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .fly-in {
+    opacity: 0;
+    animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes slideUpFade {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
