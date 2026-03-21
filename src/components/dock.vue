@@ -4,7 +4,7 @@ defineProps<{
 }>()
 
 defineEmits<{
-  (e: 'navigate', page: 'home' | 'projects' | 'links'): void
+  (e: 'navigate', page: 'home' | 'projects' | 'links' | 'qna'): void
 }>()
 </script>
 
@@ -54,7 +54,7 @@ defineEmits<{
         </a>
       </li>
       <li>
-        <a 
+        <a
           :class="{ active: currentPage === 'links' }" 
           @click="$emit('navigate', 'links')"
           style="cursor: pointer;"
@@ -72,6 +72,27 @@ defineEmits<{
             d="M440-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h160v80H280q-50 0-85 35t-35 85q0 50 35 85t85 35h160v80ZM320-440v-80h320v80H320Zm200 160v-80h160q50 0 85-35t35-85q0-50-35-85t-85-35H520v-80h160q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H520Z" />
           </svg>
           <span class="hidden sm:inline">Links</span>
+        </a>
+      </li>
+      <li>
+        <a
+          :class="{ active: currentPage === 'qna' }" 
+          @click="$emit('navigate', 'qna')"
+          style="cursor: pointer;"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            class="h-5 w-5"
+            viewBox="0 -960 960 960"
+          >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z" />
+          </svg>
+          <span class="hidden sm:inline">Q&As</span>
         </a>
       </li>
     </ul>

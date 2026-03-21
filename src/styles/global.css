@@ -55,12 +55,6 @@ body::after {
     pointer-events: none;
 }
 
-#tsparticles {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-}
-
 .stripe-bg {
     background-color: #f6f6f6;
     background-image: repeating-linear-gradient(

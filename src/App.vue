@@ -2,13 +2,15 @@
 import { ref } from 'vue'
 import Project from './pages/project.vue'
 import LinkPage from './pages/link.vue'
-import IndexPage from './pages/index.vue'
-import InitOverlay from './pages/init.vue'
+import QnA from './pages/qna.vue'
+import IndexPage from './pages/profile.vue'
+import InitOverlay from './components/init.vue'
 import Dock from './components/dock.vue'
+import Alert from './components/alert.vue'
 
 const showInit = ref(true)
 const isInitExiting = ref(false)
-const currentPage = ref<'home' | 'projects' | 'links'>('home')
+const currentPage = ref<'home' | 'projects' | 'links' | 'qna'>('home')
 
 function handleInitExitStart() {
   isInitExiting.value = true
@@ -18,7 +20,7 @@ function handleInitFinished() {
   showInit.value = false
 }
 
-function handleNavigate(page: 'home' | 'projects' | 'links') {
+function handleNavigate(page: 'home' | 'projects' | 'links' | 'qna') {
   currentPage.value = page
 }
 </script>
@@ -26,11 +28,13 @@ function handleNavigate(page: 'home' | 'projects' | 'links') {
 <template>
   <div class="app-shell stripe-bg">
     <div class="app-content flex flex-col min-h-dvh" :class="{ 'is-blurred': showInit && !isInitExiting }">
-      <main class="grow w-full z-10">    
+      <Alert />
+      <main class="grow w-full z-10">
         <Transition name="fade" mode="out-in">
           <IndexPage v-if="currentPage === 'home'" key="home" />
           <Project v-else-if="currentPage === 'projects'" key="projects" />
           <LinkPage v-else-if="currentPage === 'links'" key="links" />
+          <QnA v-else-if="currentPage === 'qna'" key="qna" />
         </Transition>
       </main>
 

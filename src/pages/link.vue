@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col items-center justify-center gap-8 -translate-y-12">
+  <div class="min-h-screen flex flex-col items-center pt-12 pb-32 gap-8 px-4">
     <h1 class="text-3xl font-bold text-center">
       - Links -
     </h1>
@@ -43,7 +43,7 @@
     { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/aira.png', name: 'Aira', desc: 'Kind and Kawaii, Forever!~', links: 'https://aira.cafe' },
     { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/akutazehy.jpeg', name: 'Akuta Zehy', desc: 'https://akutazehy.xyz/', links: 'https://akutazehy.xyz/'},
     { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/cutelittlesky.png', name: 'CuteLittleSky', desc: 'https://cutelittlesky.cn/', links: 'https://cutelittlesky.cn/' },
-    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/peter.jpeg', name: '朝仓 彩玲', desc: '火星上面有什么？', links: 'https://mygo.plus' },
+    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/peter.jpeg', name: '朝仓 彩玲', desc: '火星上面有什么？', links: 'https://mygo.plus' }, 
   ]
 </script>
 
