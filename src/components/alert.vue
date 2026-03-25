@@ -15,9 +15,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue'
-
   const isVisible = ref(true)
-
   function handleClose() {
     isVisible.value = false
   }

@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import Project from './pages/project.vue'
-import LinkPage from './pages/link.vue'
-import QnA from './pages/qna.vue'
-import IndexPage from './pages/profile.vue'
-import InitOverlay from './components/init.vue'
-import Dock from './components/dock.vue'
-import Alert from './components/alert.vue'
+  import { ref } from 'vue'
+  import Project from './pages/project.vue'
+  import LinkPage from './pages/link.vue'
+  import QnA from './pages/qna.vue'
+  import IndexPage from './pages/profile.vue'
+  import InitOverlay from './components/init.vue'
+  import Dock from './components/dock.vue'
+  import Alert from './components/alert.vue'
 
-const showInit = ref(true)
-const isInitExiting = ref(false)
-const currentPage = ref<'home' | 'projects' | 'links' | 'qna'>('home')
+  const showInit = ref(true)
+  const isInitExiting = ref(false)
+  const currentPage = ref<'home' | 'projects' | 'links' | 'qna'>('home')
 
-function handleInitExitStart() {
-  isInitExiting.value = true
-}
+  function handleInitExitStart() {
+    isInitExiting.value = true
+  }
 
-function handleInitFinished() {
-  showInit.value = false
-}
+  function handleInitFinished() {
+    showInit.value = false
+  }
 
-function handleNavigate(page: 'home' | 'projects' | 'links' | 'qna') {
-  currentPage.value = page
-}
+  function handleNavigate(page: 'home' | 'projects' | 'links' | 'qna') {
+    currentPage.value = page
+  }
 </script>
 
 <template>
@@ -59,26 +59,26 @@ function handleNavigate(page: 'home' | 'projects' | 'links' | 'qna') {
 </template>
 
 <style scoped>
-.app-shell {
-  min-height: 100vh;
-}
+  .app-shell {
+    min-height: 100vh;
+  }
 
-.app-content {
-  transition: filter 420ms ease, transform 420ms ease;
-}
+  .app-content {
+    transition: filter 420ms ease, transform 420ms ease;
+  }
 
-.app-content.is-blurred {
-  filter: blur(3px);
-  transform: scale(1.01);
-}
+  .app-content.is-blurred {
+    filter: blur(3px);
+    transform: scale(1.01);
+  }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 300ms ease;
-}
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 300ms ease;
+  }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
 </style>
