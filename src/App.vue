@@ -41,7 +41,7 @@
       <footer class="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4 pb-24 mt-auto">
         <aside>
           <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="hover:opacity-100 transition-opacity">
-            备案号预留位置
+            沪ICP备2025151889号-12
           </a>
           <p>Copyright © 2026 - All right reserved by <span class="font-bold">YasaitoriOvO</span></p>
         </aside>
