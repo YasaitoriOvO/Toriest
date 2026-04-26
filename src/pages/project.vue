@@ -122,7 +122,6 @@
       href="https://dx.yatori.cc"
       class="hover-3d mx-2 cursor-pointer"
     >
-  
       <!-- content -->
       <div class="card w-[min(92vw,34rem)] text-white bg-[radial-gradient(circle_at_bottom_left,#ffffff04_35%,transparent_36%),radial-gradient(circle_at_top_right,#ffffff04_35%,transparent_36%)] bg-size-[4.95em_4.95em]">
         <div class="card-body bg-white card-dash items-center">
@@ -146,7 +145,6 @@
       <div />
       <div />
       <div />
-      <
     </a>
   </div>
 </template>
