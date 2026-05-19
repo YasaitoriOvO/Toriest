@@ -264,8 +264,13 @@
     gap: 1.35rem;
     height: 100%;
     justify-content: center;
+    opacity: 0;
     padding: 2.25rem 1.15rem 2rem 2rem;
     position: relative;
+    transition:
+      opacity 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(0.6rem);
     z-index: 2;
   }
 
@@ -344,12 +349,12 @@
   }
 
   .profile-card:hover:not(.is-open) .intro-drawer {
-    opacity: 0.92;
-    transform: translate(1.35rem, 0.62rem) scaleX(0.88);
+    opacity: 0.82;
+    transform: translate(0.85rem, 0.45rem) scaleX(0.82);
   }
 
   .profile-card:hover:not(.is-open) .profile-main {
-    transform: translate(-1.25rem, -0.18rem) scale(1.012);
+    transform: translate(0, 0);
   }
 
   .profile-card.is-open .profile-main {
@@ -359,6 +364,12 @@
   .profile-card.is-open .intro-drawer {
     opacity: 1;
     transform: translate(0.85rem, 0.55rem) scaleX(1);
+  }
+
+  .profile-card.is-open .drawer-content {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 160ms;
   }
 
   .corner-mark {
@@ -493,11 +504,11 @@
     }
 
     .profile-card:hover:not(.is-open) .intro-drawer {
-      transform: translate(0.75rem, 0.5rem) scaleX(0.86);
+      transform: translate(0.45rem, 0.38rem) scaleX(0.8);
     }
 
     .profile-card:hover:not(.is-open) .profile-main {
-      transform: translate(-0.55rem, -0.12rem) scale(1.008);
+      transform: translate(0, 0);
     }
 
     .profile-card.is-open .profile-main {
