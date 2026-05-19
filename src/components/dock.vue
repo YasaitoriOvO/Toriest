@@ -10,7 +10,7 @@ defineEmits<{
 
 <template>
   <div class="dock-root">
-    <ul class="menu menu-horizontal bg-base-200 rounded-box shadow-lg flex-nowrap">
+    <ul class="dock-menu menu menu-horizontal bg-base-200 rounded-box shadow-lg flex-nowrap">
       <li>
         <a 
           :class="{ active: currentPage === 'home' }" 
@@ -107,6 +107,60 @@ defineEmits<{
     bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
     z-index: 30;
     max-width: calc(100vw - 2rem);
+    transition:
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dock-root:hover {
+    filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.12));
+    transform: translateX(-50%) translateY(-0.18rem);
+  }
+
+  .dock-menu {
+    gap: 0.1rem;
+    overflow: hidden;
+    transition:
+      box-shadow 520ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dock-menu li {
+    position: relative;
+  }
+
+  .dock-menu a {
+    position: relative;
+    transform: translateY(0) scale(1);
+    transition:
+      background-color 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      color 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 520ms cubic-bezier(0.68, -0.28, 0.22, 1.28);
+    will-change: transform;
+  }
+
+  .dock-menu a:hover {
+    transform: translateY(-0.18rem) scale(1.06);
+  }
+
+  .dock-menu a:active {
+    transform: translateY(0.06rem) scale(0.96);
+    transition-duration: 160ms;
+  }
+
+  .dock-menu a svg,
+  .dock-menu a span {
+    transition:
+      transform 520ms cubic-bezier(0.68, -0.28, 0.22, 1.28),
+      opacity 360ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dock-menu a:hover svg {
+    transform: translateY(-0.05rem) rotate(-5deg) scale(1.08);
+  }
+
+  .dock-menu a.active {
+    transform: translateY(-0.1rem) scale(1.04);
   }
 
   .menu a.active {
@@ -114,5 +168,19 @@ defineEmits<{
     color: var(--fallback-pc,oklch(var(--pc)/1));
     font-weight: 600;
     color: var(--color-info);
+  }
+
+  .dock-menu a.active svg {
+    transform: scale(1.08);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dock-root,
+    .dock-menu,
+    .dock-menu a,
+    .dock-menu a svg,
+    .dock-menu a span {
+      transition-duration: 1ms;
+    }
   }
 </style>

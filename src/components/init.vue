@@ -62,7 +62,7 @@
     <div class="init-panel init-panel-right" />
 
     <div class="init-content flex justify-center-safe items-center min-h-screen">
-      <div class="mockup-code w-xl shadow-xl shadow-blue-300">
+      <div class="init-code mockup-code shadow-xl shadow-blue-300">
         <pre data-prefix="$"><code>{{ commandText }}<span v-if="showCommandCursor" class="typing-cursor">|</span></code></pre>
         <pre data-prefix=">" class="text-info"><code>{{ resultText }}<span v-if="showResultCursor" class="typing-cursor">|</span></code></pre>
       </div>
@@ -98,11 +98,16 @@
   }
 
   .init-content {
+    padding: 1rem;
     position: relative;
     z-index: 2;
     opacity: 1;
     transform: scale(1);
     transition: opacity 420ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .init-code {
+    width: min(calc(100vw - 2rem), 36rem);
   }
 
   .typing-cursor {
@@ -114,6 +119,22 @@
     display: inline-flex;
     align-items: center;
     min-height: 1.2em;
+    max-width: 100%;
+  }
+
+  .mockup-code :deep(pre) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (max-width: 520px) {
+    .init-content {
+      padding-inline: 1.25rem;
+    }
+
+    .init-code {
+      width: min(calc(100vw - 2.5rem), 36rem);
+    }
   }
 
   .init-overlay.is-exiting .init-content {
