@@ -44,6 +44,7 @@
     { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/akutazehy.jpeg', name: 'Akuta Zehy', desc: 'https://akutazehy.xyz/', links: 'https://akutazehy.xyz/'},
     { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/cutelittlesky.png', name: 'CuteLittleSky', desc: 'https://cutelittlesky.cn/', links: 'https://cutelittlesky.cn/' },
     { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/peter.jpeg', name: '朝仓 彩玲', desc: '火星上面有什么？', links: 'https://mygo.plus' }, 
+    { icon: 'https://carolyn.sh/img/avatar.png', name: 'Carolyn Sun', desc: 'Where Carolyn Lives', links: 'https://carolyn.sh'}
   ]
 </script>
 
