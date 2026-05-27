@@ -46,7 +46,7 @@
         <span class="mb-4">
           <img
             class="avatar w-28 h-28 rounded-full border-4 border-lime-200 shadow-lg"
-            src="https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/me/icon.jpeg"
+            src="../assets/images/me/me.jpeg"
             alt="Profile"
           >
         </span>

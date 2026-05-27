@@ -39,11 +39,11 @@
 
 <script setup>
   const links = [
-    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/hakadao.jpeg', name: 'Hakadao', desc: 'Now I am become a loser, the destroyer of myself', links: 'https://hakadao.cc' },
-    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/aira.png', name: 'Aira', desc: 'Kind and Kawaii, Forever!~', links: 'https://aira.cafe' },
-    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/akutazehy.jpeg', name: 'Akuta Zehy', desc: 'https://akutazehy.xyz/', links: 'https://akutazehy.xyz/'},
-    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/cutelittlesky.png', name: 'CuteLittleSky', desc: 'https://cutelittlesky.cn/', links: 'https://cutelittlesky.cn/' },
-    { icon: 'https://cdn.jsdelivr.net/gh/yasaitoriovo/toriest-img@latest/friend/peter.jpeg', name: '朝仓 彩玲', desc: '火星上面有什么？', links: 'https://mygo.plus' }, 
+    { icon: '../assets/images/friends/hakadao.jpeg', name: 'Hakadao', desc: 'Now I am become a loser, the destroyer of myself', links: 'https://hakadao.cc' },
+    { icon: '../assets/images/friends/aira.png', name: 'Aira', desc: 'Kind and Kawaii, Forever!~', links: 'https://aira.cafe' },
+    { icon: '../assets/images/friends/akutazehy.jpeg', name: 'Akuta Zehy', desc: 'https://akutazehy.xyz/', links: 'https://akutazehy.xyz/'},
+    { icon: '../assets/images/friends/cutelittlesky.png', name: 'CuteLittleSky', desc: 'https://cutelittlesky.cn/', links: 'https://cutelittlesky.cn/' },
+    { icon: '../assets/images/friends/peter.jpeg', name: '朝仓 彩玲', desc: '火星上面有什么？', links: 'https://mygo.plus' }, 
     { icon: 'https://carolyn.sh/img/avatar.png', name: 'Carolyn Sun', desc: 'Where Carolyn Lives', links: 'https://carolyn.sh'}
   ]
 </script>
