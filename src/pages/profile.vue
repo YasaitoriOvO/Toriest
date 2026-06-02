@@ -30,7 +30,7 @@
               Pronouns:
             </div>
             <code class="identity-text">
-              She / Her
+              They / Them
             </code>
           </div>
         </div>
