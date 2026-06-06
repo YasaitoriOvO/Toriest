@@ -55,6 +55,8 @@
         </h1>
         <p class="text-gray-600 mb-6 text-center">
           Always be brave to <del>sleep</del> <span class="font-bold">Dream.</span>
+          <br>
+          Full-stack developer,
         </p>
 
         <!-- Social Media Buttons -->
