@@ -42,10 +42,10 @@
     { icon: '/images/friends/hakadao.jpeg', name: 'Hakadao', desc: 'Now I am become a loser, the destroyer of myself', links: 'https://hakadao.cc' },
     { icon: '/images/friends/aira.png', name: 'Aira', desc: 'Kind and Kawaii, Forever!~', links: 'https://aira.cafe' },
     { icon: '/images/friends/akutazehy.jpeg', name: 'Akuta Zehy', desc: 'https://akutazehy.xyz/', links: 'https://akutazehy.xyz/'},
-    { icon: '/images/friends/cutelittlesky.png', name: 'CuteLittleSky', desc: 'https://cutelittlesky.cn/', links: 'https://cutelittlesky.cn/' },
     { icon: '/images/friends/peter.jpeg', name: '朝仓 彩玲', desc: '火星上面有什么？', links: 'https://mygo.plus' }, 
     { icon: 'https://carolyn.sh/img/avatar.png', name: 'Carolyn Sun', desc: 'Where Carolyn Lives', links: 'https://carolyn.sh'},
-    {icon: 'https://avatars.githubusercontent.com/u/90670998?v=4', name:'Nekro’s SEKAI', desc:'自留地、日常记录、经验分享。', links:'https://www.nekro.top/'}
+    { icon: '/images/friends/nekro.jpeg', name:'Nekro’s SEKAI', desc:'自留地、日常记录、经验分享。', links:'https://www.nekro.top/'},
+    { icon: '/images/friends/mengdu.png', name:'奶酪糖·梦都', desc:'一只即将步入社会的笨蛋小猫。', links:'https://www.kwymengdu.online/'},
   ]
 </script>
 
