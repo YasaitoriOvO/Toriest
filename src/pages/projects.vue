@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen flex flex-col items-center justify-center gap-8 -translate-y-8">
-    <h1 class="text-3xl font-bold text-center">
+  <div class="min-h-screen flex flex-col items-center justify-center gap-8 -translate-y-8" aria-labelledby="projects-title">
+    <h1 id="projects-title" class="text-3xl font-bold text-center">
       - Projects -
     </h1>
 

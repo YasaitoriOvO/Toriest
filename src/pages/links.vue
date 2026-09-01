@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen flex flex-col items-center pt-12 pb-32 gap-8 px-4">
-    <h1 class="text-3xl font-bold text-center">
+  <div class="min-h-screen flex flex-col items-center pt-12 pb-32 gap-8 px-4" aria-labelledby="links-title">
+    <h1 id="links-title" class="text-3xl font-bold text-center">
       - Links -
     </h1>
 

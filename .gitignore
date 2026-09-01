@@ -10,6 +10,12 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+local
+.nuxt
+.output
+.data
+.tmp
+migration-report.json
 *.local
 
 # Editor directories and files

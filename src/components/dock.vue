@@ -1,186 +1,160 @@
 <script setup lang="ts">
-defineProps<{
-  currentPage: string
-}>()
+const route = useRoute()
 
-defineEmits<{
-  (e: 'navigate', page: 'home' | 'projects' | 'links' | 'qna'): void
-}>()
+const navigation = [
+  {
+    label: 'Home',
+    to: '/',
+    match: (path: string) => path === '/',
+    icon: 'M3 12l2-2m0 0 7-7 7 7M5 10v10a1 1 0 001 1h3m10-11 2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+  },
+  {
+    label: 'Projects',
+    to: '/projects',
+    match: (path: string) => path.startsWith('/projects'),
+    icon: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    label: 'Links',
+    to: '/links',
+    match: (path: string) => path.startsWith('/links'),
+    icon: 'M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71m2.25 5.82a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71',
+  },
+  {
+    label: 'Q&As',
+    to: '/qna',
+    match: (path: string) => path.startsWith('/qna'),
+    icon: 'M8.23 9a3.75 3.75 0 117.08 1.75c-.78 1.16-2.06 1.55-2.67 2.45-.31.46-.39.8-.39 1.55M12 18h.01M4 4h16v16H4z',
+  },
+  {
+    label: 'Blog',
+    to: '/blog',
+    match: (path: string) => path.startsWith('/blog'),
+    icon: 'M5 4h10a2 2 0 012 2v14H7a2 2 0 01-2-2V4zm12 3h2v13h-2M8 8h6M8 12h6M8 16h4',
+  },
+] as const
 </script>
 
 <template>
-  <div class="dock-root">
-    <ul class="dock-menu menu menu-horizontal bg-base-200 rounded-box shadow-lg flex-nowrap">
-      <li>
-        <a 
-          :class="{ active: currentPage === 'home' }" 
-          @click="$emit('navigate', 'home')"
-          style="cursor: pointer;"
+  <nav class="dock-root" aria-label="主要导航">
+    <ul class="dock-menu menu menu-horizontal flex-nowrap rounded-box bg-base-200 shadow-lg">
+      <li v-for="item in navigation" :key="item.to">
+        <NuxtLink
+          :to="item.to"
+          :class="{ active: item.match(route.path) }"
+          :aria-current="item.match(route.path) ? 'page' : undefined"
         >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
             class="h-5 w-5"
             fill="none"
             viewBox="0 0 24 24"
-            stroke="currentColor">
+            stroke="currentColor"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="2"
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              :d="item.icon"
+            />
           </svg>
-          <span class="hidden sm:inline">Home</span>
-        </a>
-      </li>
-      <li>
-        <a 
-          :class="{ active: currentPage === 'projects' }" 
-          @click="$emit('navigate', 'projects')"
-          style="cursor: pointer;"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span class="hidden sm:inline">Projects</span>
-        </a>
-      </li>
-      <li>
-        <a
-          :class="{ active: currentPage === 'links' }" 
-          @click="$emit('navigate', 'links')"
-          style="cursor: pointer;"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            class="h-5 w-5"
-            viewBox="0 -960 960 960"
-          >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M440-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h160v80H280q-50 0-85 35t-35 85q0 50 35 85t85 35h160v80ZM320-440v-80h320v80H320Zm200 160v-80h160q50 0 85-35t35-85q0-50-35-85t-85-35H520v-80h160q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H520Z" />
-          </svg>
-          <span class="hidden sm:inline">Links</span>
-        </a>
-      </li>
-      <li>
-        <a
-          :class="{ active: currentPage === 'qna' }" 
-          @click="$emit('navigate', 'qna')"
-          style="cursor: pointer;"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            class="h-5 w-5"
-            viewBox="0 -960 960 960"
-          >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z" />
-          </svg>
-          <span class="hidden sm:inline">Q&As</span>
-        </a>
+          <span class="hidden sm:inline">{{ item.label }}</span>
+          <span class="sr-only sm:hidden">{{ item.label }}</span>
+        </NuxtLink>
       </li>
     </ul>
-  </div>
+  </nav>
 </template>
 
 <style scoped>
-  .dock-root {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
-    z-index: 30;
-    max-width: calc(100vw - 2rem);
-    transition:
-      transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
-      filter 520ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
+.dock-root {
+  position: fixed;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+  z-index: 30;
+  max-width: calc(100vw - 2rem);
+  transform: translateX(-50%);
+  transition:
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-  .dock-root:hover {
-    filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.12));
-    transform: translateX(-50%) translateY(-0.18rem);
-  }
+.dock-root:hover {
+  filter: drop-shadow(0 16px 24px rgb(0 0 0 / 0.12));
+}
 
-  .dock-menu {
-    gap: 0.1rem;
-    overflow: hidden;
-    transition:
-      box-shadow 520ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
+.dock-menu {
+  gap: 0.1rem;
+  overflow: hidden;
+  padding-block: 0.125rem;
+  transition:
+    box-shadow 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-  .dock-menu li {
-    position: relative;
-  }
+.dock-menu li {
+  position: relative;
+}
 
-  .dock-menu a {
-    position: relative;
-    transform: translateY(0) scale(1);
-    transition:
-      background-color 420ms cubic-bezier(0.16, 1, 0.3, 1),
-      color 420ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 520ms cubic-bezier(0.68, -0.28, 0.22, 1.28);
-    will-change: transform;
-  }
+.dock-menu a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  text-align: center;
+  white-space: nowrap;
+  transform: translateY(0) scale(1);
+  transition:
+    background-color 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 360ms cubic-bezier(0.68, -0.28, 0.22, 1.28);
+  will-change: transform;
+}
 
-  .dock-menu a:hover {
-    transform: translateY(-0.18rem) scale(1.06);
-  }
+.dock-menu a:not(.active):hover {
+  transform: translateY(-0.18rem) scale(1.06);
+}
 
-  .dock-menu a:active {
-    transform: translateY(0.06rem) scale(0.96);
-    transition-duration: 160ms;
-  }
+.dock-menu a:not(.active):active {
+  transform: translateY(0.06rem) scale(0.96);
+  transition-duration: 160ms;
+}
 
+.dock-menu a:focus-visible {
+  outline: 3px solid color-mix(in oklab, var(--color-info) 60%, white);
+  outline-offset: -3px;
+}
+
+.dock-menu a svg,
+.dock-menu a span {
+  transition:
+    transform 360ms cubic-bezier(0.68, -0.28, 0.22, 1.28),
+    opacity 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dock-menu a svg {
+  flex: 0 0 auto;
+}
+
+.dock-menu a:not(.active):hover svg {
+  transform: translateY(-0.05rem) rotate(-5deg) scale(1.08);
+}
+
+.dock-menu a.active {
+  color: var(--color-info);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-root,
+  .dock-menu,
+  .dock-menu a,
   .dock-menu a svg,
   .dock-menu a span {
-    transition:
-      transform 520ms cubic-bezier(0.68, -0.28, 0.22, 1.28),
-      opacity 360ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-duration: 1ms;
   }
-
-  .dock-menu a:hover svg {
-    transform: translateY(-0.05rem) rotate(-5deg) scale(1.08);
-  }
-
-  .dock-menu a.active {
-    transform: translateY(-0.1rem) scale(1.04);
-  }
-
-  .menu a.active {
-    background-color: var(--fallback-p,oklch(var(--p)/1));
-    color: var(--fallback-pc,oklch(var(--pc)/1));
-    font-weight: 600;
-    color: var(--color-info);
-  }
-
-  .dock-menu a.active svg {
-    transform: scale(1.08);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .dock-root,
-    .dock-menu,
-    .dock-menu a,
-    .dock-menu a svg,
-    .dock-menu a span {
-      transition-duration: 1ms;
-    }
-  }
+}
 </style>
