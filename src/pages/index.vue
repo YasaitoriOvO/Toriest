@@ -80,11 +80,10 @@
             /></svg>
           </a>
           
-          <a
+          <NuxtLink
             class="btn text-black bg-white btn-square"
-            href="https://blog.yatori.cc"
-            target="_blank"
-            rel="noopener noreferrer"
+            to="/blog"
+            aria-label="阅读博客"
             @click.stop
           >
             <svg
@@ -98,7 +97,7 @@
                 d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h440l200 200v440q0 33-23.5 56.5T760-120H200Zm0-80h560v-400H600v-160H200v560Zm80-80h400v-80H280v80Zm0-320h200v-80H280v80Zm0 160h400v-80H280v80Zm-80-320v160-160 560-560Z"
               />
             </svg>
-          </a>
+          </NuxtLink>
 
           <a
             class="btn bg-white text-black btn-square"
@@ -154,6 +153,23 @@
 
 <script setup lang="ts">
   import { ref } from 'vue'
+
+  useHead({
+    title: 'Toriest',
+    titleTemplate: '%s',
+    link: [
+      { rel: 'canonical', href: 'https://yatori.cc/' },
+    ],
+  })
+
+  useSeoMeta({
+    description: 'Yasaitori 的个人主页、项目与开发笔记。',
+    ogTitle: 'Toriest',
+    ogDescription: 'Yasaitori 的个人主页、项目与开发笔记。',
+    ogUrl: 'https://yatori.cc/',
+    ogType: 'website',
+    twitterCard: 'summary',
+  })
 
   const isIntroOpen = ref(false)
   const copiedGpg = ref(false)
