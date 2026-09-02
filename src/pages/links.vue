@@ -46,6 +46,7 @@
     { icon: 'https://carolyn.sh/img/avatar.png', name: 'Carolyn Sun', desc: 'Where Carolyn Lives', links: 'https://carolyn.sh'},
     { icon: '/images/friends/nekro.jpeg', name:'Nekro’s SEKAI', desc:'自留地、日常记录、经验分享。', links:'https://www.nekro.top/'},
     { icon: '/images/friends/mengdu.png', name:'奶酪糖·梦都', desc:'一只即将步入社会的笨蛋小猫。', links:'https://www.kwymengdu.online/'},
+    { icon: 'https://avatars.githubusercontent.com/u/135337676?v=4', name: 'Ventus Uta', desc: '8点、Classroom见', links: 'https://ventusuta.com/' },
   ]
 </script>
 

@@ -1,4 +1,12 @@
 <script setup lang="ts">
+const props = withDefaults(defineProps<{
+  visible?: boolean
+  animateEntrance?: boolean
+}>(), {
+  visible: true,
+  animateEntrance: false,
+})
+
 const route = useRoute()
 
 const navigation = [
@@ -36,7 +44,15 @@ const navigation = [
 </script>
 
 <template>
-  <nav class="dock-root" aria-label="主要导航">
+  <nav
+    class="dock-root"
+    :class="{
+      'is-concealed': !props.visible,
+      'is-entering': props.visible && props.animateEntrance,
+    }"
+    :aria-hidden="!props.visible"
+    aria-label="主要导航"
+  >
     <ul class="dock-menu menu menu-horizontal flex-nowrap rounded-box bg-base-200 shadow-lg">
       <li v-for="item in navigation" :key="item.to">
         <NuxtLink
@@ -74,9 +90,18 @@ const navigation = [
   z-index: 30;
   max-width: calc(100vw - 2rem);
   transform: translateX(-50%);
-  transition:
-    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: filter 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dock-root.is-concealed {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(calc(100% + env(safe-area-inset-bottom, 0px) + 2rem));
+  visibility: hidden;
+}
+
+.dock-root.is-entering {
+  animation: dock-spring-in 900ms both;
 }
 
 .dock-root:hover {
@@ -148,7 +173,40 @@ const navigation = [
   font-weight: 600;
 }
 
+@keyframes dock-spring-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(calc(100% + env(safe-area-inset-bottom, 0px) + 2rem));
+  }
+
+  48% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-0.65rem);
+  }
+
+  66% {
+    transform: translateX(-50%) translateY(0.28rem);
+  }
+
+  80% {
+    transform: translateX(-50%) translateY(-0.14rem);
+  }
+
+  91% {
+    transform: translateX(-50%) translateY(0.06rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .dock-root.is-entering {
+    animation: none;
+  }
+
   .dock-root,
   .dock-menu,
   .dock-menu a,

@@ -58,7 +58,7 @@ useHead({
 <template>
   <div class="blog-index min-h-screen px-4 pb-32 pt-12 sm:px-6">
     <header class="mx-auto max-w-3xl text-center">
-      <h1 class="text-4xl font-bold text-zinc-900 sm:text-5xl">
+      <h1 class="text-3xl font-bold text-zinc-900 sm:text-5xl">
         - Blog -
       </h1>
     </header>

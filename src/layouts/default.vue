@@ -7,6 +7,8 @@ import InitOverlay from '~/components/init.vue'
 const route = useRoute()
 const showInit = ref(route.path === '/')
 const isInitExiting = ref(false)
+const showDock = ref(!showInit.value)
+const animateDockEntrance = showInit.value
 
 function handleInitExitStart() {
   isInitExiting.value = true
@@ -14,6 +16,7 @@ function handleInitExitStart() {
 
 function handleInitFinished() {
   showInit.value = false
+  showDock.value = true
 }
 </script>
 
@@ -44,7 +47,10 @@ function handleInitFinished() {
         </aside>
       </footer>
 
-      <Dock />
+      <Dock
+        :visible="showDock"
+        :animate-entrance="animateDockEntrance"
+      />
     </div>
 
     <InitOverlay
