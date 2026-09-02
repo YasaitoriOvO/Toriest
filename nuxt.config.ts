@@ -1,6 +1,4 @@
 import tailwindcss from '@tailwindcss/vite'
-import { copyFile } from 'node:fs/promises'
-import { resolve } from 'node:path'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-08-31',
@@ -52,14 +50,6 @@ export default defineNuxtConfig({
       crawlLinks: true,
       failOnError: true,
       routes: ['/404'],
-    },
-    hooks: {
-      async 'prerender:done'() {
-        await copyFile(
-          resolve('.output/public/404/index.html'),
-          resolve('.output/public/404.html'),
-        )
-      },
     },
   },
 
