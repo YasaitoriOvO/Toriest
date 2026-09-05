@@ -3,6 +3,7 @@ import { computed } from 'vue'
 
 const route = useRoute()
 const config = useRuntimeConfig()
+const { onPointerMove, resetTilt } = usePointerTilt(0)
 
 const { data: posts } = await useAsyncData('blog-posts', () => (
   queryCollection('blog')
@@ -27,6 +28,11 @@ const filteredPosts = computed(() => {
 
   return (posts.value ?? []).filter(post => post.tags.includes(selectedTag.value))
 })
+
+function capturePostPosition(element: Element) {
+  const card = element as HTMLElement
+  card.style.setProperty('--leave-top', `${card.offsetTop}px`)
+}
 
 function formatDate(value: Date | string) {
   return new Intl.DateTimeFormat('zh-CN', {
@@ -57,13 +63,13 @@ useHead({
 
 <template>
   <div class="blog-index min-h-screen px-4 pb-32 pt-12 sm:px-6">
-    <header class="mx-auto max-w-3xl text-center">
+    <header class="motion-reveal mx-auto max-w-3xl text-center">
       <h1 class="text-3xl font-bold text-zinc-900 sm:text-5xl">
         - Blog -
       </h1>
     </header>
 
-    <nav v-if="tags.length" class="mx-auto mt-8 flex max-w-4xl flex-wrap justify-center gap-2" aria-label="按标签筛选文章">
+    <nav v-if="tags.length" style="--reveal-delay: 70ms" class="motion-reveal mx-auto mt-8 flex max-w-4xl flex-wrap justify-center gap-2" aria-label="按标签筛选文章">
       <NuxtLink
         to="/blog"
         class="tag-filter"
@@ -84,12 +90,22 @@ useHead({
       </NuxtLink>
     </nav>
 
-    <section class="mx-auto mt-10 grid w-full max-w-4xl gap-5" aria-live="polite">
+    <TransitionGroup
+      name="post-list"
+      type="transition"
+      tag="section"
+      class="post-list mx-auto mt-10 grid w-full max-w-4xl gap-5"
+      aria-live="polite"
+      @before-leave="capturePostPosition"
+    >
       <article
         v-for="(post, index) in filteredPosts"
+        v-reveal="index"
         :key="post.path"
-        class="post-card card fly-in overflow-hidden border border-white/70 bg-base-100 shadow-sm"
-        :style="{ animationDelay: `${Math.min(index, 6) * 70}ms` }"
+        class="post-card card pointer-glow motion-lift overflow-hidden border border-white/70 bg-base-100 shadow-sm"
+        @pointermove="onPointerMove"
+        @pointerleave="resetTilt"
+        @pointercancel="resetTilt"
       >
         <NuxtLink :to="post.path" class="post-link group">
           <img
@@ -129,24 +145,30 @@ useHead({
         </NuxtLink>
       </article>
 
-      <div v-if="filteredPosts.length === 0" class="empty-state card border border-base-300 bg-base-100 p-8 text-center">
+      <div v-if="filteredPosts.length === 0" key="empty" class="empty-state card border border-base-300 bg-base-100 p-8 text-center">
         <h2 class="text-xl font-bold text-zinc-800">没有找到文章</h2>
         <p class="mt-2 text-zinc-600">这个标签下暂时还没有内容。</p>
         <NuxtLink to="/blog" class="btn btn-outline btn-sm mx-auto mt-5">查看全部文章</NuxtLink>
       </div>
-    </section>
+    </TransitionGroup>
   </div>
 </template>
 
 <style scoped>
-.post-card {
-  transition: box-shadow 240ms ease, transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
-}
+.post-list { position: relative; }
 
-.post-card:hover {
-  box-shadow: 0 20px 44px rgb(24 24 27 / 0.12);
-  transform: translateY(-0.2rem);
+.post-list-move,
+.post-list-enter-active { transition: transform 420ms var(--ease-out), opacity 260ms ease; }
+.post-list-leave-active {
+  position: absolute;
+  top: var(--leave-top);
+  left: 0;
+  width: 100%;
+  transition: opacity 140ms ease, transform 140ms var(--ease-in);
+  pointer-events: none;
 }
+.post-list-enter-from { opacity: 0; transform: translateY(12px); }
+.post-list-leave-to { opacity: 0; transform: scale(0.98); }
 
 .post-link {
   color: inherit;
@@ -177,7 +199,7 @@ useHead({
   font-weight: 700;
   min-height: 2.75rem;
   padding: 0.5rem 0.9rem;
-  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+  transition: background-color var(--motion-fast) ease, border-color var(--motion-fast) ease, color var(--motion-fast) ease, transform var(--motion-normal) var(--ease-spring);
 }
 
 .tag-filter:hover {
@@ -200,39 +222,12 @@ useHead({
 .read-more {
   color: #166534;
   font-weight: 700;
-  transition: transform 180ms ease;
+  transition: transform var(--motion-normal) var(--ease-spring);
 }
 
 .group:hover .read-more {
-  transform: translateX(0.2rem);
+  transform: translateX(0.35rem);
 }
 
-.fly-in {
-  animation: slide-up-fade 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0;
-}
-
-@keyframes slide-up-fade {
-  from {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .post-card,
-  .tag-filter,
-  .read-more {
-    transition-duration: 1ms;
-  }
-
-  .fly-in {
-    animation-duration: 1ms;
-    animation-delay: 0ms !important;
-  }
-}
+.tag-filter:active { transform: scale(0.95); }
 </style>

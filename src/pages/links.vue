@@ -1,15 +1,18 @@
 <template>
   <div class="min-h-screen flex flex-col items-center pt-12 pb-32 gap-8 px-4" aria-labelledby="links-title">
-    <h1 id="links-title" class="text-3xl font-bold text-center">
+    <h1 id="links-title" class="motion-reveal text-3xl font-bold text-center">
       - Links -
     </h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div
         v-for="(link, index) in links"
+        v-reveal="index"
         :key="link.name"
-        class="card card-dash bg-base-100 fly-in"
-        :style="{ animationDelay: `${index * 0.1}s` }"
+        class="card card-dash pointer-glow bg-base-100 motion-lift"
+        @pointermove="onPointerMove"
+        @pointerleave="resetTilt"
+        @pointercancel="resetTilt"
       >
         <div class="card-body">
           <div class="flex items-center gap-2">
@@ -27,6 +30,7 @@
             <a
               :href="link.links"
               target="_blank"
+              rel="noopener noreferrer"
               class="btn btn-primary w-full"
             >GO
             </a>
@@ -38,6 +42,7 @@
 </template>
 
 <script setup>
+  const { onPointerMove, resetTilt } = usePointerTilt(0)
   const links = [
     { icon: '/images/friends/hakadao.jpeg', name: 'Hakadao', desc: 'Now I am become a loser, the destroyer of myself', links: 'https://hakadao.cc' },
     { icon: '/images/friends/aira.png', name: 'Aira', desc: 'Kind and Kawaii, Forever!~', links: 'https://aira.cafe' },
@@ -51,28 +56,8 @@
 </script>
 
 <style scoped>
-  .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  .fly-in {
-    opacity: 0;
-    animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  @keyframes slideUpFade {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+.card img { transition: transform var(--motion-spring) var(--ease-spring); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .card:hover img { transform: rotate(-6deg) scale(1.08); }
+}
 </style>

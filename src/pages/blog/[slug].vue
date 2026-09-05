@@ -125,10 +125,11 @@ useHead(() => {
         >
       </header>
 
-      <details v-if="tocLinks.length" class="toc-mobile mx-auto mt-9 max-w-3xl rounded-xl border border-lime-200 bg-white/70 p-4 lg:hidden">
-        <summary class="min-h-11 cursor-pointer font-bold text-green-800">文章目录</summary>
-        <BlogToc :links="tocLinks" class="mt-3" />
-      </details>
+      <BlogTocDropdown
+        v-if="tocLinks.length"
+        :links="tocLinks"
+        class="toc-mobile mx-auto mt-9 max-w-3xl rounded-xl border border-lime-200 bg-white/70 p-4 lg:hidden"
+      />
 
       <div class="article-grid mt-10">
         <div aria-hidden="true" class="hidden lg:block" />
@@ -179,11 +180,6 @@ useHead(() => {
 
 .article-panel {
   width: 100%;
-}
-
-.toc-mobile summary {
-  align-items: center;
-  display: flex;
 }
 
 @media (min-width: 1024px) {

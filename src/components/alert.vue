@@ -1,5 +1,5 @@
 <template>
-  <Transition name="alert-toast">
+  <Transition name="alert-toast" appear>
     <div v-if="isVisible" class="toast toast-top toast-end z-100">
       <div
         role="alert"
@@ -12,7 +12,7 @@
           <h3 class="font-bold text-sm">Cookie Policy</h3>
           <div class="text-xs opacity-90">We will not use cookies for no reason.</div>
         </div>
-        <button class="btn btn-sm btn-ghost absolute top-2 right-2" @click="handleClose">✕</button>
+        <button aria-label="关闭提示" class="btn btn-sm btn-ghost absolute top-2 right-2" @click="handleClose">✕</button>
       </div>
     </div>
   </Transition>
@@ -30,7 +30,7 @@
 <style scoped>
   .alert-toast-enter-active,
   .alert-toast-leave-active {
-    will-change: opacity, transform, filter;
+    will-change: opacity, transform;
   }
 
   .alert-toast-enter-active {
@@ -41,7 +41,7 @@
   }
 
   .alert-toast-leave-active {
-    transition-duration: 1ms;
+    transition: opacity 160ms ease, transform 200ms var(--ease-in);
   }
 
   .alert-toast-enter-from,
@@ -65,7 +65,6 @@
       filter 420ms cubic-bezier(0.16, 1, 0.3, 1),
       opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
       transform 560ms cubic-bezier(0.34, 1.4, 0.64, 1);
-    will-change: transform;
   }
 
   .alert-panel:hover {

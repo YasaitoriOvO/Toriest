@@ -29,12 +29,12 @@ NqW/VqegjAkapsPQtFmlN1tOgrNuAQDRUN7gH7nWlnyk0i7LFqJKaS+RcXCO3Va5
 
 <template>
   <div class="min-h-screen flex flex-col items-center pt-12 pb-32 gap-8 px-4">
-    <h1 class="text-3xl font-bold text-center">
+    <h1 class="motion-reveal text-3xl font-bold text-center">
       - Q&As -
     </h1>
 
     <div class="w-full max-w-2xl flex flex-col gap-2">
-      <div class="fly-in collapse collapse-arrow bg-base-100 border border-base-300" style="animation-delay: 0.1s;">
+      <div class="motion-reveal collapse collapse-arrow bg-base-100 border border-base-300" style="--reveal-delay: 80ms">
         <input type="radio" name="my-accordion-1" checked="true">
         <div class="collapse-title font-bold">
           你是谁？
@@ -45,7 +45,7 @@ NqW/VqegjAkapsPQtFmlN1tOgrNuAQDRUN7gH7nWlnyk0i7LFqJKaS+RcXCO3Va5
         </div>
       </div>
 
-      <div class="fly-in collapse collapse-arrow bg-base-100 border border-base-300" style="animation-delay: 0.1s;">
+      <div class="motion-reveal collapse collapse-arrow bg-base-100 border border-base-300" style="--reveal-delay: 140ms">
         <input type="radio" name="my-accordion-1">
         <div class="collapse-title font-bold">
           你的 GPG 公钥在哪？
@@ -72,7 +72,7 @@ NqW/VqegjAkapsPQtFmlN1tOgrNuAQDRUN7gH7nWlnyk0i7LFqJKaS+RcXCO3Va5
         </div>
       </div>
 
-      <div class="fly-in collapse collapse-arrow bg-base-100 border border-base-300" style="animation-delay: 0.2s;">
+      <div class="motion-reveal collapse collapse-arrow bg-base-100 border border-base-300" style="--reveal-delay: 200ms">
         <input type="radio" name="my-accordion-1">
         <div class="collapse-title font-bold">
           这个网站是如何编写的？
@@ -83,7 +83,7 @@ NqW/VqegjAkapsPQtFmlN1tOgrNuAQDRUN7gH7nWlnyk0i7LFqJKaS+RcXCO3Va5
         </div>
       </div>
 
-      <div class="fly-in collapse collapse-arrow bg-base-100 border border-base-300" style="animation-delay: 0.3s;">
+      <div class="motion-reveal collapse collapse-arrow bg-base-100 border border-base-300" style="--reveal-delay: 260ms">
         <input type="radio" name="my-accordion-1">
         <div class="collapse-title font-bold">
           如何把我的站点放进友链里？
@@ -94,17 +94,20 @@ NqW/VqegjAkapsPQtFmlN1tOgrNuAQDRUN7gH7nWlnyk0i7LFqJKaS+RcXCO3Va5
       </div>
     </div>
 
-    <p class="fly-in text-gray-600 text-center" style="animation-delay: 0.4s;">
+    <p class="motion-reveal text-gray-600 text-center" style="--reveal-delay: 320ms">
       ···
     </p>
   </div>
 </template>
 
 <style scoped>
-  .fly-in {
-    opacity: 0;
-    animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  .collapse {
+    transition: grid-template-rows 380ms var(--ease-out), background-color 220ms ease, border-color 220ms ease;
   }
+
+  .collapse:has(input:checked) { border-color: rgb(132 204 22 / 0.45); }
+  .collapse-title::after { transition: transform 380ms var(--ease-spring); }
+  .collapse-content { transition: opacity 220ms ease, padding 380ms var(--ease-out), visibility 380ms; }
 
   .code-card {
     background:
@@ -189,15 +192,4 @@ NqW/VqegjAkapsPQtFmlN1tOgrNuAQDRUN7gH7nWlnyk0i7LFqJKaS+RcXCO3Va5
     }
   }
 
-  @keyframes slideUpFade {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
 </style>

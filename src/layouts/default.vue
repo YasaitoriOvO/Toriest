@@ -9,9 +9,11 @@ const showInit = ref(route.path === '/')
 const isInitExiting = ref(false)
 const showDock = ref(!showInit.value)
 const animateDockEntrance = showInit.value
+const { onPress } = usePressRipple()
 
 function handleInitExitStart() {
   isInitExiting.value = true
+  showDock.value = true
 }
 
 function handleInitFinished() {
@@ -21,13 +23,15 @@ function handleInitFinished() {
 </script>
 
 <template>
-  <div class="app-shell stripe-bg">
+  <div class="app-shell stripe-bg" @click.capture="onPress">
     <a class="skip-link" href="#main-content">跳到正文</a>
     <div
       class="app-content flex min-h-dvh flex-col"
       :class="{ 'is-blurred': showInit && !isInitExiting }"
+      :style="{ '--reveal-play-state': showInit && !isInitExiting ? 'paused' : 'running' }"
+      :inert="showInit && !isInitExiting"
     >
-      <Alert />
+      <Alert v-if="!showInit" />
 
       <main id="main-content" class="z-10 w-full grow">
         <slot />
@@ -67,12 +71,11 @@ function handleInitFinished() {
 }
 
 .app-content {
-  transition: filter 420ms ease, transform 420ms ease;
+  transition: opacity 420ms var(--ease-out);
 }
 
 .app-content.is-blurred {
-  filter: blur(3px);
-  transform: scale(1.01);
+  opacity: 0.4;
 }
 
 @media (prefers-reduced-motion: reduce) {

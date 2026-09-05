@@ -1,17 +1,21 @@
 <template>
   <div class="hero-bg min-h-screen flex flex-col items-center justify-center py-8">
     <div
-      class="profile-card w-full max-w-md"
+      class="profile-card pointer-tilt motion-reveal w-full max-w-md"
       role="button"
       tabindex="0"
       :class="{ 'is-open': isIntroOpen }"
       :aria-expanded="isIntroOpen"
-      aria-label="Toggle intro drawer"
+      aria-label="展开或收起个人介绍"
+      aria-controls="intro-drawer"
+      @pointermove="!isIntroOpen && onPointerMove($event)"
+      @pointerleave="resetTilt"
+      @pointercancel="resetTilt"
       @click="isIntroOpen = !isIntroOpen"
-      @keydown.enter.prevent="isIntroOpen = !isIntroOpen"
-      @keydown.space.prevent="isIntroOpen = !isIntroOpen"
+      @keydown.enter.self.prevent="isIntroOpen = !isIntroOpen"
+      @keydown.space.self.prevent="isIntroOpen = !isIntroOpen"
     >
-      <div class="intro-drawer" @click.stop>
+      <div id="intro-drawer" class="intro-drawer" :inert="!isIntroOpen" @click.stop>
         <div class="drawer-content">
           <div class="drawer-block">
             <div class="drawer-label">
@@ -36,31 +40,40 @@
         </div>
       </div>
 
-      <span class="profile-main bg-white rounded-3xl shadow-2xl card p-8 flex flex-col items-center">
+      <span class="profile-main pointer-glow bg-white rounded-3xl shadow-2xl card p-8 flex flex-col items-center">
         <span class="corner-mark" aria-hidden="true">
           <span class="mark mark-forward">&gt;</span>
           <span class="mark mark-peek">|</span>
           <span class="mark mark-open">&lt;</span>
         </span>
 
-        <span class="mb-4">
+        <span class="avatar-orbit motion-reveal mb-4" style="--reveal-delay: 80ms">
+          <span class="avatar-ring" aria-hidden="true" />
+          <span class="avatar-sparkles" aria-hidden="true">
+            <span
+              v-for="(spark, index) in sparks"
+              :key="index"
+              class="avatar-spark"
+              :style="{ '--spark-x': `${spark[0]}px`, '--spark-y': `${spark[1]}px`, '--spark-delay': `${index * 25}ms` }"
+            />
+          </span>
           <img
             class="avatar w-28 h-28 rounded-full border-4 border-lime-200 shadow-lg"
             src="../assets/images/me/me.jpeg"
             alt="Profile"
           >
         </span>
-        <h1 class="text-3xl font-bold text-green-500 mb-2">
+        <h1 class="profile-name motion-reveal text-3xl font-bold text-green-500 mb-2" style="--reveal-delay: 140ms">
           Yasaitori
         </h1>
-        <p class="text-gray-600 mb-6 text-center">
+        <p class="motion-reveal text-gray-600 mb-6 text-center" style="--reveal-delay: 200ms">
           Always be brave to <del>sleep</del> <span class="font-bold">Dream.</span>
           <br>
           Full-stack developer
         </p>
 
         <!-- Social Media Buttons -->
-        <span class="flex space-x-4">
+        <span class="social-links motion-reveal flex space-x-4" style="--reveal-delay: 260ms">
           <a
             class="btn bg-black text-white btn-square"
             href="https://github.com/yasaitoriovo"
@@ -152,7 +165,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, watch } from 'vue'
 
   useHead({
     title: 'Toriest',
@@ -171,7 +184,10 @@
     twitterCard: 'summary',
   })
 
+  const { onPointerMove, resetTilt } = usePointerTilt()
+  const sparks = [[-78, -45], [-28, -76], [45, -68], [84, -18], [72, 48], [23, 75], [-48, 64], [-87, 12]]
   const isIntroOpen = ref(false)
+  watch(isIntroOpen, resetTilt)
   const copiedGpg = ref(false)
   const gpgKey = '0344 8421 82CF A006 DD12 465C 6C32 A3C 36F5 F275'
 
@@ -185,12 +201,20 @@
 </script>
 
 <style scoped>
-  a {
-    transition: transform 0.3s ease-in-out;
+  .social-links a {
+    transition: transform var(--motion-normal) var(--ease-spring), box-shadow var(--motion-normal) var(--ease-out);
   }
 
-  a:hover {
-    transform: scale(1.1);
+  @media (hover: hover) and (pointer: fine) {
+    .social-links a:hover {
+      transform: translateY(-4px) rotate(-4deg) scale(1.06);
+      box-shadow: 0 8px 16px rgb(24 24 27 / 0.12);
+    }
+  }
+
+  .social-links a:active {
+    transform: translateY(1px) scale(0.93);
+    transition-duration: 100ms;
   }
 
   .profile-card {
@@ -220,9 +244,8 @@
     position: relative;
     transform: translate(0, 0);
     transition:
-      transform 0.82s cubic-bezier(0.64, -0.16, 0.18, 1.12),
+      transform 640ms var(--ease-spring),
       box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
     z-index: 3;
   }
 
@@ -252,7 +275,7 @@
     transform: translate(-0.15rem, 0.12rem) scaleX(0.68);
     transform-origin: right center;
     transition:
-      transform 0.82s cubic-bezier(0.64, -0.16, 0.18, 1.12),
+      transform 640ms var(--ease-spring),
       opacity 0.48s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 1;
   }
@@ -411,7 +434,7 @@
     transition:
       border-radius 0.5s cubic-bezier(0.68, -0.35, 0.22, 1.35),
       transform 0.55s cubic-bezier(0.68, -0.35, 0.22, 1.35),
-      width 0.55s cubic-bezier(0.68, -0.35, 0.22, 1.35);
+      background-color var(--motion-normal) ease;
     width: 2rem;
     z-index: 4;
   }
@@ -437,7 +460,6 @@
   .profile-card:hover:not(.is-open) .corner-mark {
     border-radius: 0.35rem;
     transform: rotate(90deg) scaleX(0.82);
-    width: 1.55rem;
   }
 
   .profile-card:hover:not(.is-open) .mark-forward {
@@ -453,7 +475,6 @@
   .profile-card.is-open .corner-mark {
     border-radius: 999px 0.45rem 0.45rem 999px;
     transform: translateX(-0.3rem) rotate(0) scale(1.05);
-    width: 2.2rem;
   }
 
   .profile-card.is-open .mark-forward,
@@ -467,86 +488,144 @@
     transform: translateY(0) rotate(0) scale(1);
   }
 
-  .avatar {
+  .avatar-orbit {
     position: relative;
+    display: block;
+    isolation: isolate;
+  }
+
+  .avatar-orbit::before {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    z-index: -1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(163 230 53 / 0.3), transparent 70%);
+    opacity: 0.65;
+    animation: halo-breathe 4s ease-in-out 2;
+    animation-play-state: var(--reveal-play-state, running);
+  }
+
+  .avatar {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    animation: breathe 3s ease-in-out infinite;
+    transition: transform var(--motion-spring) var(--ease-spring);
   }
 
-  .avatar::after {
-    content: "";
+  .avatar-ring {
     position: absolute;
-    inset: -10px;
+    inset: -7px;
+    border: 1px solid rgb(34 197 94 / 0.15);
+    border-top-color: rgb(6 182 212 / 0.7);
+    border-right-color: rgb(132 204 22 / 0.65);
     border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(120,255,120,0.4),
-      transparent 70%
-    );
-    animation: breathe 3s infinite;
+    pointer-events: none;
+    rotate: -25deg;
+    transition: rotate 900ms var(--ease-out), scale 560ms var(--ease-spring);
   }
 
-  @media (max-width: 520px) {
-    .profile-card {
-      width: min(calc(100vw - 2.5rem), 28rem);
-    }
-
-    .intro-drawer {
-      right: 0.2rem;
-      width: 50%;
-    }
-
-    .drawer-content {
-      gap: 1rem;
-      padding: 2rem 0.9rem 1.6rem 1.35rem;
-    }
-
-    .drawer-label {
-      font-size: 0.76rem;
-    }
-
-    .gpg-hidden,
-    .identity-text {
-      font-size: 0.74rem;
-    }
-
-    .copy-button {
-      font-size: 0.68rem;
-      padding: 0.36rem 0.52rem;
-    }
-
-    .identity-text {
-      margin-left: 0.2rem;
-    }
-
-    .profile-card:hover:not(.is-open) .intro-drawer {
-      transform: translate(0.45rem, 0.38rem) scaleX(0.8);
-    }
-
-    .profile-card:hover:not(.is-open) .profile-main {
-      transform: translate(0, 0);
-    }
-
-    .profile-card.is-open .profile-main {
-      transform: translate(-37%, -0.12rem) scale(1.008);
-    }
-
-    .profile-card.is-open .intro-drawer {
-      transform: translate(0.35rem, 0.45rem) scaleX(1);
-    }
+  .avatar-sparkles {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
   }
 
-  @keyframes breathe {
-    0% {
-      box-shadow: 0 0 5px rgba(120, 255, 120, 0.3);
+  .avatar-spark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+    background: #22c58b;
+    clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  }
+
+  .avatar-spark:nth-child(3n) { background: #06b6d4; width: 8px; height: 8px; }
+  .avatar-spark:nth-child(3n + 1) { background: #84cc16; }
+
+  .profile-card.is-open .avatar-spark {
+    animation: spark-out 850ms var(--ease-out) var(--spark-delay) backwards;
+  }
+
+  @supports (background-clip: text) {
+    .profile-name {
+      background: linear-gradient(110deg, #16a34a 25%, #0891b2 42%, #65a30d 53%, #16a34a 70%);
+      background-size: 260% 100%;
+      background-position: 100% 50%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      transition: background-position 1000ms var(--ease-out);
     }
-    50% {
-      box-shadow: 0 0 25px rgba(120, 255, 120, 0.7);
+
+    .profile-card:hover .profile-name,
+    .profile-card.is-open .profile-name { background-position: 0% 50%; }
+  }
+
+  .profile-card:hover .avatar-ring,
+  .profile-card.is-open .avatar-ring { rotate: 65deg; scale: 1.04; }
+
+  @keyframes spark-out {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.25); }
+    18% {
+      opacity: 1;
+      transform: translate(calc(var(--spark-x) * 0.45 - 50%), calc(var(--spark-y) * 0.45 - 50%)) rotate(20deg) scale(1);
+    }
+    65% {
+      opacity: 0.8;
+      transform: translate(calc(var(--spark-x) * 0.85 - 50%), calc(var(--spark-y) * 0.85 - 50%)) rotate(65deg) scale(0.65);
     }
     100% {
-      box-shadow: 0 0 5px rgba(120, 255, 120, 0.3);
+      opacity: 0;
+      transform: translate(calc(var(--spark-x) - 50%), calc(var(--spark-y) - 50%)) rotate(90deg) scale(0.2);
     }
+  }
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .avatar-orbit:hover .avatar { transform: rotate(-7deg) scale(1.06); }
+  }
+
+  /* On narrow screens the drawer opens below, keeping the whole card in view. */
+  @media (max-width: 850px) {
+    .hero-bg { padding-block: 6rem 9rem; }
+    .profile-card { width: min(calc(100vw - 2.5rem), 28rem); }
+    .intro-drawer {
+      inset: auto 0 0;
+      width: 100%;
+      height: 10rem;
+      min-height: 0;
+      transform: translateY(0) scale(0.96);
+      transform-origin: center top;
+    }
+    .drawer-content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      gap: 1rem;
+      padding: 1.25rem;
+      transform: translateY(-8px);
+    }
+    .drawer-row { padding-left: 0; }
+    .drawer-label { font-size: 0.76rem; }
+    .gpg-hidden, .identity-text { font-size: 0.74rem; }
+    .identity-text { margin-left: 0; }
+    .profile-card:hover:not(.is-open) .intro-drawer {
+      transform: translateY(0.4rem) scale(0.98);
+    }
+    .profile-card.is-open .profile-main { transform: translateY(-3rem); }
+    .profile-card.is-open .intro-drawer { transform: translateY(6rem) scale(1); }
+    .profile-card.is-open .drawer-content { transform: translateY(0); }
+  }
+
+  @media (hover: none) {
+    .profile-card:hover:not(.is-open) .intro-drawer { opacity: 0; }
+  }
+
+  @keyframes halo-breathe {
+    0%, 100% { opacity: 0.65; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.12); }
   }
 </style>

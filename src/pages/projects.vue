@@ -1,17 +1,22 @@
 <template>
   <div class="min-h-screen flex flex-col items-center justify-center gap-8 -translate-y-8" aria-labelledby="projects-title">
-    <h1 id="projects-title" class="text-3xl font-bold text-center">
+    <h1 id="projects-title" class="motion-reveal text-3xl font-bold text-center">
       - Projects -
     </h1>
 
     <a
       href="https://kirakira.moe"
-      class="hover-3d mx-2 cursor-pointer"
+      aria-label="KiRa KiRa Douga"
+      style="--reveal-delay: 100ms"
+      class="project-link pointer-tilt motion-reveal mx-2 cursor-pointer"
+      @pointermove="onPointerMove"
+      @pointerleave="resetTilt"
+      @pointercancel="resetTilt"
     >
   
       <!-- content -->
       <div class="card w-[min(92vw,34rem)] text-white bg-[radial-gradient(circle_at_bottom_left,#ffffff04_35%,transparent_36%),radial-gradient(circle_at_top_right,#ffffff04_35%,transparent_36%)] bg-size-[4.95em_4.95em]">
-        <div class="card-body bg-white card-dash items-center">
+        <div class="card-body pointer-glow bg-white card-dash items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -108,23 +113,20 @@
         </div>
       </div>
       
-      <!-- 8 empty divs needed for the 3D effect -->
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
+
     </a>
         <a
       href="https://dx.yatori.cc"
-      class="hover-3d mx-2 cursor-pointer"
+      aria-label="DX Stream"
+      style="--reveal-delay: 180ms"
+      class="project-link pointer-tilt motion-reveal mx-2 cursor-pointer"
+      @pointermove="onPointerMove"
+      @pointerleave="resetTilt"
+      @pointercancel="resetTilt"
     >
       <!-- content -->
       <div class="card w-[min(92vw,34rem)] text-white bg-[radial-gradient(circle_at_bottom_left,#ffffff04_35%,transparent_36%),radial-gradient(circle_at_top_right,#ffffff04_35%,transparent_36%)] bg-size-[4.95em_4.95em]">
-        <div class="card-body bg-white card-dash items-center">
+        <div class="card-body pointer-glow bg-white card-dash items-center">
           <svg class="w-full max-w-md h-auto" viewBox="0 0 233 76" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect y="20" width="123" height="12" fill="#00B4CB"/>
           <rect x="86" y="43" width="147" height="11" fill="#DFE35E"/>
@@ -136,15 +138,20 @@
         </div>
       </div>
       
-      <!-- 8 empty divs needed for the 3D effect -->
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
+
     </a>
   </div>
 </template>
+
+<script setup lang="ts">
+const { onPointerMove, resetTilt } = usePointerTilt()
+</script>
+
+<style scoped>
+.project-link { display: block; border-radius: 1rem; }
+.project-link:focus-visible { outline: 3px solid #84cc16; outline-offset: 6px; }
+.project-link .card { transition: box-shadow var(--motion-normal) var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .project-link:hover .card { box-shadow: 0 18px 36px rgb(24 24 27 / 0.12); }
+}
+</style>
