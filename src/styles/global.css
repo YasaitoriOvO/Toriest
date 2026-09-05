@@ -116,7 +116,7 @@ body::after {
 
 .page-leave-to {
     opacity: 0;
-    translate: 0 -6px;
+    translate: 0 var(--page-leave-y, 12px);
 }
 
 /* Backwards fill releases the element when entry ends, so hover stays responsive.

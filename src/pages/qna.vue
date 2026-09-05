@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
+  useSeoMeta({ title: 'Q&As' })
+
   const gpgPublicKey = `-----BEGIN PGP PUBLIC KEY BLOCK-----
 mDMEagyaxxYJKwYBBAHaRw8BAQdAYc9EMoXgHFdoGs7ebfw+ouaAn/5FweKm2O/7
 w1nKYne0L1lhc2FpdG9yaSAoSnVzdCBmb3IgbWUpIDxjYWlqaWRheW9Ab3V0bG9v
@@ -35,61 +37,69 @@ NqW/VqegjAkapsPQtFmlN1tOgrNuAQDRUN7gH7nWlnyk0i7LFqJKaS+RcXCO3Va5
 
     <div class="w-full max-w-2xl flex flex-col gap-2">
       <div class="motion-reveal collapse collapse-arrow bg-base-100 border border-base-300" style="--reveal-delay: 80ms">
-        <input type="radio" name="my-accordion-1" checked="true">
-        <div class="collapse-title font-bold">
+        <input type="checkbox" aria-labelledby="qna-intro-title" checked>
+        <div id="qna-intro-title" class="collapse-title font-bold">
           你是谁？
         </div>
         <div class="collapse-content text-sm">
-          很无聊的一个人，所以我写了这个问题。<br>
-          我是菜鸡，喜欢摸鱼，擅长睡觉。
+          <div class="qna-answer">
+            很无聊的一个人，所以我写了这个问题。<br>
+            我是菜鸡，喜欢摸鱼，擅长睡觉。
+          </div>
         </div>
       </div>
 
       <div class="motion-reveal collapse collapse-arrow bg-base-100 border border-base-300" style="--reveal-delay: 140ms">
-        <input type="radio" name="my-accordion-1">
-        <div class="collapse-title font-bold">
+        <input type="checkbox" aria-labelledby="qna-gpg-title">
+        <div id="qna-gpg-title" class="collapse-title font-bold">
           你的 GPG 公钥在哪？
         </div>
         <div class="collapse-content text-sm">
-          <a
-            href="https://keys.openpgp.org/vks/v1/by-fingerprint/0344842182CFA006DD12465C6C32A3CE36F5F275"
-            class="link link-info"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            点击这里
-          </a>下载我的 GPG 公钥
+          <div class="qna-answer">
+            <a
+              href="https://keys.openpgp.org/vks/v1/by-fingerprint/0344842182CFA006DD12465C6C32A3CE36F5F275"
+              class="link link-info"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              点击这里
+            </a>下载我的 GPG 公钥
 
-          <div class="code-card">
-            <div class="code-toolbar">
-              <span class="code-language">PGP PUBLIC KEY</span>
-              <button class="copy-code-button" type="button" @click="copyGpgPublicKey">
-                {{ copiedGpg ? 'Copied' : 'Copy' }}
-              </button>
+            <div class="code-card">
+              <div class="code-toolbar">
+                <span class="code-language">PGP PUBLIC KEY</span>
+                <button class="copy-code-button" type="button" @click="copyGpgPublicKey">
+                  {{ copiedGpg ? 'Copied' : 'Copy' }}
+                </button>
+              </div>
+              <pre><code>{{ gpgPublicKey }}</code></pre>
             </div>
-            <pre><code>{{ gpgPublicKey }}</code></pre>
           </div>
         </div>
       </div>
 
       <div class="motion-reveal collapse collapse-arrow bg-base-100 border border-base-300" style="--reveal-delay: 200ms">
-        <input type="radio" name="my-accordion-1">
-        <div class="collapse-title font-bold">
+        <input type="checkbox" aria-labelledby="qna-stack-title">
+        <div id="qna-stack-title" class="collapse-title font-bold">
           这个网站是如何编写的？
         </div>
         <div class="collapse-content text-sm">
-          这个网站是用 <a href="https://vuejs.org/" class="link link-info">Vue.js</a> 和 <a href="https://tailwindcss.com/" class="link link-info">Tailwind CSS</a> 编写的。<br>
-          使用了 <a href="https://daisyui.com/" class="link link-info">DaisyUI</a> 组件库。
+          <div class="qna-answer">
+            这个网站是用 <a href="https://vuejs.org/" class="link link-info">Vue.js</a> 和 <a href="https://tailwindcss.com/" class="link link-info">Tailwind CSS</a> 编写的。<br>
+            使用了 <a href="https://daisyui.com/" class="link link-info">DaisyUI</a> 组件库。
+          </div>
         </div>
       </div>
 
       <div class="motion-reveal collapse collapse-arrow bg-base-100 border border-base-300" style="--reveal-delay: 260ms">
-        <input type="radio" name="my-accordion-1">
-        <div class="collapse-title font-bold">
+        <input type="checkbox" aria-labelledby="qna-links-title">
+        <div id="qna-links-title" class="collapse-title font-bold">
           如何把我的站点放进友链里？
         </div>
         <div class="collapse-content text-sm">
-          给我发邮件！这里是 <a href="mailto:caijidayo@outlook.com" class="link link-info">我的邮箱</a>。
+          <div class="qna-answer">
+            给我发邮件！这里是 <a href="mailto:caijidayo@outlook.com" class="link link-info">我的邮箱</a>。
+          </div>
         </div>
       </div>
     </div>
@@ -102,12 +112,46 @@ NqW/VqegjAkapsPQtFmlN1tOgrNuAQDRUN7gH7nWlnyk0i7LFqJKaS+RcXCO3Va5
 
 <style scoped>
   .collapse {
-    transition: grid-template-rows 380ms var(--ease-out), background-color 220ms ease, border-color 220ms ease;
+    --qna-duration: 280ms;
+    --qna-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    transition: grid-template-rows var(--qna-duration) var(--qna-ease), border-color 220ms ease;
   }
 
   .collapse:has(input:checked) { border-color: rgb(132 204 22 / 0.45); }
-  .collapse-title::after { transition: transform 380ms var(--ease-spring); }
-  .collapse-content { transition: opacity 220ms ease, padding 380ms var(--ease-out), visibility 380ms; }
+  .collapse-title::after { transition: transform var(--qna-duration) var(--qna-ease); }
+
+  .collapse-content {
+    /* Keep the intrinsic content height throughout the grid transition.
+       DaisyUI's content-visibility and fit-content changes otherwise snap it shut. */
+    content-visibility: visible;
+    min-height: 0;
+    /* The card is the clipping boundary; a second clip here shrinks the text faster. */
+    overflow: visible;
+    padding: 0;
+    visibility: hidden;
+    transition: visibility 0s linear var(--qna-duration);
+  }
+
+  .collapse:has(> input:checked) > .collapse-content {
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .collapse:not(:has(> input:checked)) > .collapse-content {
+    pointer-events: none;
+  }
+
+  .qna-answer {
+    padding: 0 1rem 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .collapse,
+    .collapse-title::after,
+    .collapse-content {
+      transition: none;
+    }
+  }
 
   .code-card {
     background:

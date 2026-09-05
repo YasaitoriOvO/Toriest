@@ -42,6 +42,8 @@
 </template>
 
 <script setup>
+  useSeoMeta({ title: 'Links' })
+
   const { onPointerMove, resetTilt } = usePointerTilt(0)
   const links = [
     { icon: '/images/friends/hakadao.jpeg', name: 'Hakadao', desc: 'Now I am become a loser, the destroyer of myself', links: 'https://hakadao.cc' },

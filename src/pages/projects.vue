@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col items-center justify-center gap-8 -translate-y-8" aria-labelledby="projects-title">
+  <div class="min-h-screen flex flex-col items-center justify-center gap-8 -translate-y-8" style="--page-leave-y: -6px" aria-labelledby="projects-title">
     <h1 id="projects-title" class="motion-reveal text-3xl font-bold text-center">
       - Projects -
     </h1>
@@ -144,6 +144,8 @@
 </template>
 
 <script setup lang="ts">
+useSeoMeta({ title: 'Projects' })
+
 const { onPointerMove, resetTilt } = usePointerTilt()
 </script>
 
