@@ -40,6 +40,14 @@ function handleInitFinished() {
       <footer class="footer footer-center bg-base-300 p-4 pb-24 text-base-content sm:footer-horizontal">
         <aside>
           <a
+            href="https://icp.gov.moe/?keyword=20261140"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="transition-opacity hover:opacity-100"
+          >
+            萌ICP备20261140号
+          </a>
+          <a
             href="https://beian.miit.gov.cn/"
             target="_blank"
             rel="noopener noreferrer"
