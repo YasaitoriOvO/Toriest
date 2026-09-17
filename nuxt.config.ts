@@ -8,6 +8,14 @@ export default defineNuxtConfig({
 
   css: ['~/styles/global.css'],
 
+  routeRules: {
+    '/**': {
+      headers: {
+        'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
+      },
+    },
+  },
+
   app: {
     head: {
       htmlAttrs: {
