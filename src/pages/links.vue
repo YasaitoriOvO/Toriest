@@ -54,6 +54,7 @@
     { icon: '/images/friends/nekro.jpeg', name:'Nekro’s SEKAI', desc:'自留地、日常记录、经验分享。', links:'https://www.nekro.top/'},
     { icon: '/images/friends/mengdu.png', name:'奶酪糖·梦都', desc:'一只即将步入社会的笨蛋小猫。', links:'https://www.kwymengdu.online/'},
     { icon: 'https://avatars.githubusercontent.com/u/135337676?v=4', name: 'Ventus Uta', desc: '8点、Classroom见', links: 'https://ventusuta.com/' },
+    { icon: 'https://www.cocoac.social/images/avatar.webp', name: 'Cocoa-c', desc: 'https://www.cocoac.social/', links: 'https://www.cocoac.social/' }
   ]
 </script>
 
